@@ -6,6 +6,7 @@ import TrendCard from "@/components/TrendCard";
 import PlatformFilter from "@/components/PlatformFilter";
 import EmptyState from "@/components/EmptyState";
 import LoadingState from "@/components/LoadingState";
+import ComponentDemo from "@/components/ComponentDemo";
 
 // Temporary mock data for UI development
 const MOCK_TRENDS = [
@@ -78,6 +79,7 @@ const Index = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [trends, setTrends] = useState<any[]>([]);
   const [activePlatform, setActivePlatform] = useState<Platform>("all");
+  const [showComponentDemo, setShowComponentDemo] = useState(false);
   
   const handleSearch = async (term: string) => {
     setSearchTerm(term);
@@ -114,7 +116,15 @@ const Index = () => {
           <p className="text-slate-600 max-w-2xl mx-auto text-lg">
             Discover trending discussions, reviews, and opinions from across YouTube, Reddit, and Twitter on any topic
           </p>
+          <button 
+            onClick={() => setShowComponentDemo(!showComponentDemo)}
+            className="mt-4 px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition-colors"
+          >
+            {showComponentDemo ? "Hide Component Demo" : "Show Component Demo"}
+          </button>
         </div>
+        
+        {showComponentDemo && <ComponentDemo />}
         
         <SearchBar onSearch={handleSearch} />
         
